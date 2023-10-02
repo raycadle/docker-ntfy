@@ -4,4 +4,7 @@
 exec \
     s6-notifyoncheck -d -n 300 -w 1000 \
     -c "nc -z localhost 8080" \
-    s6-setuidgid abc /usr/bin/ntfy serve --listen-http=:8080
+    s6-setuidgid abc /usr/bin/ntfy serve \
+    --listen-http=:8080 --listen-https=:3443 \
+    --key-file=/config/keys/private/cert.key \
+    --cert-file=/config/keys/cert.crt

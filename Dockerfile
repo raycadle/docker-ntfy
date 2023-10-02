@@ -3,7 +3,7 @@ FROM ghcr.io/linuxserver/baseimage-alpine:3.18
 ARG BUILD_DATE
 ARG VERSION
 ARG NTFY_RELEASE
-ARG NTFY_ARCH
+ARG NTFY_ARCH="ntfy_2.7.0_linux_amd64"
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="N3WK1D"
 
@@ -11,14 +11,12 @@ LABEL maintainer="N3WK1D"
 RUN \
   echo "**** install runtime packages ****" && \
   apk add --no-cache --upgrade \
+    openssl \
     curl && \
   echo "**** install ntfy ****" && \
 	mkdir -p /tmp/ntfy && \
 	if [ -z ${NTFY_RELEASE+x} ]; then \
     NTFY_RELEASE=$(curl -sX GET "https://api.github.com/repos/binwiederhier/ntfy/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]'); \
-  fi && \
-	if [ -z ${NTFY_ARCH+x} ]; then \
-    NTFY_ARCH="ntfy_2.7.0_linux_amd64"; \
   fi && \
   curl -o \
     /tmp/ntfy.tar.gz -L \
@@ -35,5 +33,5 @@ RUN \
 COPY root/ /
 
 # Ports and Volumes
-EXPOSE 80
+EXPOSE 8080 3443
 VOLUME /config

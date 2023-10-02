@@ -17,12 +17,12 @@
 # To disable HTTP, set "listen-http" to "-".
 #
 listen-http: ":8080"
-#listen-https: ":443"
+listen-https: ":3443"
 
 # Path to the private key & cert file for the HTTPS web server. Not used if "listen-https" is not set.
 #
-#key-file: /config/ssl/private/notify.key
-#cert-file: /config/ssl/notify.cert
+key-file: /config/keys/private/cert.key
+cert-file: /config/keys/cert.crt
 
 # If "cache-file" is set, messages are cached in a local SQLite database instead of only in-memory.
 # This allows for service restarts without losing messages in support of the since= parameter.
