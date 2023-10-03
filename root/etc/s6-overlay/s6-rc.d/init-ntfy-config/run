@@ -3,6 +3,7 @@
 
 mkdir -p /config/keys/private &> /dev/null
 
+SUBJECT="/C=./ST=./L=./O=./OU=./CN=."
 if [[ -f /config/keys/private/cert.key && -f /config/keys/cert.crt ]]; then
     echo "using keys found in /config/keys"
 else
@@ -10,9 +11,10 @@ else
     rm -f \
         /config/keys/cert.key \
         /config/keys/cert.crt || true
-    openssl req -new -x509 -days 3650 -nodes -out /config/keys/cert.crt -keyout /config/keys/private/cert.key
+    openssl req -new -x509 -days 3650 -nodes -out /config/keys/cert.crt -keyout /config/keys/private/cert.key -subj "$SUBJECT"
 fi
 
 # permissions
 lsiown -R abc:abc \
-    /config
+    /config \
+    /etc/ntfy
