@@ -18,7 +18,7 @@ RUN \
     NTFY_RELEASE=$(curl -sX GET "https://api.github.com/repos/binwiederhier/ntfy/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
 	if [ -z ${NTFY_ARCH+x} ]; then \
-    NTFY_ARCH="ntfy_2.7.0_linux_amd64"; \
+    NTFY_ARCH="ntfy_2.8.0_linux_amd64"; \
   fi && \
   curl -o \
     /tmp/ntfy.tar.gz -L \
