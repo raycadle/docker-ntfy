@@ -7,12 +7,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --tag ntfy:$(date +%s)
+      run: docker build --build-arg BUILD_DATE="$(date +%d/%m/%y)" --build-arg VERSION="$(date +%R:%S)" -t ntfy:latest .
