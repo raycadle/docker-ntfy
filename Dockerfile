@@ -23,7 +23,7 @@ RUN \
   curl -o \
     /tmp/ntfy.tar.gz -L \
     "https://github.com/binwiederhier/ntfy/releases/download/${NTFY_RELEASE}/${NTFY_ARCH}.tar.gz" && \
-  tar zxf \
+  tar -zxf \
     /tmp/ntfy.tar.gz -C /tmp/ntfy && \
   cp -a /tmp/ntfy/"${NTFY_ARCH}"/ntfy /usr/bin/ntfy && \
   echo "**** clean up ****" && \
