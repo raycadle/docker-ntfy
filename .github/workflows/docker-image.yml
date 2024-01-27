@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@main
     - name: Build and publish the Docker image to GHCR
-      run: 
+      run: |
         docker login --username raycadle --password ${{ secrets.GH_PAT }} ghcr.io
         docker build --build-arg BUILD_DATE="$(date +%d/%m/%y)" --build-arg VERSION="$(date +%R:%S)" --tag ghcr.io/raycadle/ntfy:latest .
         docker push ghcr.io/raycadle/ntfy:latest
