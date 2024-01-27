@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI for GHCR
 
 on:
   push:
@@ -7,9 +7,12 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build_and_publish:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
-    - name: Build the Docker image
-      run: docker build --build-arg BUILD_DATE="$(date +%d/%m/%y)" --build-arg VERSION="$(date +%R:%S)" -t ntfy:latest .
+    - name: Build and publish the Docker image to GHCR
+      run: 
+        docker login --username raycadle --password ${{ secrets.GH_PAT }} ghcr.io
+        docker build --build-arg BUILD_DATE="$(date +%d/%m/%y)" --build-arg VERSION="$(date +%R:%S)" --tag ghcr.io/raycadle/ntfy:latest .
+        docker push ghcr.io/raycadle/ntfy:latest
