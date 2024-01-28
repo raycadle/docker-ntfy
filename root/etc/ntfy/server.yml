@@ -16,8 +16,8 @@
 # To listen on all interfaces, you may omit the IP address, e.g. ":443".
 # To disable HTTP, set "listen-http" to "-".
 #
-listen-http: ":8080"
-listen-https: ":3443"
+listen-http: "-"
+listen-https: ":443"
 
 # Path to the private key & cert file for the HTTPS web server. Not used if "listen-https" is not set.
 #
