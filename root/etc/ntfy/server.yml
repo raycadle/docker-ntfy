@@ -8,7 +8,7 @@
 # - iOS push notifications for self-hosted servers (to calculate the Firebase poll_request topic)
 # - Matrix Push Gateway (to validate that the pushkey is correct)
 #
-# base-url:
+#base-url:
 
 # Listen address for the HTTP & HTTPS web server. If "listen-https" is set, you must also
 # set "key-file" and "cert-file". Format: [<ip>]:<port>, e.g. "1.2.3.4:8080".
@@ -16,13 +16,13 @@
 # To listen on all interfaces, you may omit the IP address, e.g. ":443".
 # To disable HTTP, set "listen-http" to "-".
 #
-listen-http: "-"
+listen-http: ":80"
 listen-https: ":443"
 
 # Path to the private key & cert file for the HTTPS web server. Not used if "listen-https" is not set.
 #
 key-file: "/config/keys/private/cert.key"
-cert-file: "/config/keys/cert.crt"
+cert-file: "/config/keys/public/cert.crt"
 
 # If "cache-file" is set, messages are cached in a local SQLite database instead of only in-memory.
 # This allows for service restarts without losing messages in support of the since= parameter.
@@ -61,10 +61,10 @@ auth-default-access: "read-write"
 # - attachment-file-size-limit is the per-file attachment size limit (e.g. 300k, 2M, 100M)
 # - attachment-expiry-duration is the duration after which uploaded attachments will be deleted (e.g. 3h, 20h)
 #
-#attachment-cache-dir:
-#attachment-total-size-limit: "5G"
-#attachment-file-size-limit: "15M"
-#attachment-expiry-duration: "3h"
+attachment-cache-dir: "/config/attachments"
+attachment-total-size-limit: "1G"
+attachment-file-size-limit: "5M"
+attachment-expiry-duration: "24h"
 
 # Interval in which keepalive messages are sent to the client. This is to prevent
 # intermediaries closing the connection for inactivity.
