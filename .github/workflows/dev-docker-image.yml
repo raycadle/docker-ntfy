@@ -1,0 +1,15 @@
+name: Development Docker Image CI for GHCR
+
+on:
+  push:
+    branches: [ "dev" ]
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - name: Build and publish the development Docker image to GHCR
+      run: |
+        docker login --username raycadle --password ${{ secrets.GH_PAT }} ghcr.io
+        docker build --build-arg BUILD_DATE="$(date +%d/%m/%y)" --build-arg VERSION="$(date +%R:%S)" --tag ghcr.io/raycadle/ntfy-dev:latest .
+        docker push ghcr.io/raycadle/ntfy-dev:latest
